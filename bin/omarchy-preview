@@ -48,7 +48,11 @@ fi
 if [[ -d $first_path ]]; then
   preview_with nautilus --new-window "$first_path" ||
     preview_with xdg-open "$first_path" ||
-    preview_with gio open "$first_path"
+    preview_with gio open "$first_path" ||
+    {
+      echo "omarchy preview: no preview application found for $first_path" >&2
+      exit 1
+    }
 fi
 
 mime=$(file -b --mime-type -- "$first_path" 2>/dev/null || true)
