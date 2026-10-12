@@ -41,7 +41,7 @@ preview_with() {
 }
 
 first_path="$1"
-if [[ ! -e $first_path ]]; then
+if [[ ! -e "$first_path" ]]; then
   echo "omarchy preview: not found: $first_path" >&2
   exit 1
 fi
@@ -50,7 +50,7 @@ if command -v sushi >/dev/null 2>&1; then
   exec sushi "$@"
 fi
 
-if [[ -d $first_path ]]; then
+if [[ -d "$first_path" ]]; then
   preview_with nautilus --new-window "$first_path" ||
     preview_with xdg-open "$first_path" ||
     preview_with gio open "$first_path" ||
